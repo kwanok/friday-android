@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">FRIDAY</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_chat_rooms">Chat Rooms</string>
-    <string name="title_account">Account</string>
+    <string name="title_home">홈</string>
+    <string name="title_dashboard">탐색</string>
+    <string name="title_notifications">알림</string>
+    <string name="title_chat_rooms">채팅</string>
+    <string name="title_account">계정</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
