@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val nextIntent = Intent(this, LoginActivity::class.java)
+        startActivity(nextIntent)
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED;
 
