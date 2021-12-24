@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3451086956521739" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.2203125" />
       </map>
     </option>
   </component>
