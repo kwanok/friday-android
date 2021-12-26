@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.example.friday.FridayApplication
 import com.example.friday.R
 import com.example.friday.RetrofitService
 import kotlinx.android.synthetic.main.activity_login.*
@@ -40,8 +41,24 @@ class LoginActivity : AppCompatActivity() {
                     Log.e("retrofit", t.toString())
                 }
 
-                override fun onResponse(call: Call<ResponseDTO>?, response: Response<ResponseDTO>?) {
+                override fun onResponse(
+                    call: Call<ResponseDTO>?,
+                    response: Response<ResponseDTO>?
+                ) {
                     Log.d("retrofit", response?.body().toString())
+
+                    if (response?.body()?.accessToken != null ) {
+
+                        FridayApplication.prefs.setString("accessToken",
+                            response.body()!!.accessToken
+                        )
+
+                        FridayApplication.prefs.setString("refreshToken",
+                            response.body()!!.refreshToken
+                        )
+                    }
+
+                    Log.d("accessToken", FridayApplication.prefs.getString("accessToken", "empty"))
                 }
             })
         }
