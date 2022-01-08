@@ -19,11 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val nextIntent = Intent(this, LoginActivity::class.java)
-        startActivity(nextIntent)
+        chkLogin()
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED;
+        navView.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
@@ -51,5 +50,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun chkLogin() {
+        val accessToken = FridayApplication.prefs.getString("accessToken", "")
+        val refreshToken = FridayApplication.prefs.getString("refreshToken", "")
+
+        if (accessToken == "" || refreshToken == "") {
+            val nextIntent = Intent(this, LoginActivity::class.java)
+            startActivity(nextIntent)
+        }
     }
 }

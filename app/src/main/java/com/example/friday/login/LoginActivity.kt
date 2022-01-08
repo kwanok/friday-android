@@ -24,43 +24,43 @@ class LoginActivity : AppCompatActivity() {
             val email = emailInput.text.toString()
             val password = passwordInput.text.toString()
 
-            val retrofit = Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val server: RetrofitService = retrofit.create(RetrofitService::class.java)
-
-            val loginRequest = LoginRequest(
-                email=email,
-                password=password,
-            )
-
-            server.postRequest(loginRequest).enqueue(object : Callback<ResponseDTO> {
-                override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
-                    Log.e("retrofit", t.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<ResponseDTO>?,
-                    response: Response<ResponseDTO>?
-                ) {
-                    Log.d("retrofit", response?.body().toString())
-
-                    if (response?.body()?.accessToken != null ) {
-
-                        FridayApplication.prefs.setString("accessToken",
-                            response.body()!!.accessToken
-                        )
-
-                        FridayApplication.prefs.setString("refreshToken",
-                            response.body()!!.refreshToken
-                        )
-                    }
-
-                    Log.d("accessToken", FridayApplication.prefs.getString("accessToken", "empty"))
-                }
-            })
+            login(email, password)
         }
+    }
+
+    private fun login(email: String, password: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val server: RetrofitService = retrofit.create(RetrofitService::class.java)
+
+        val loginRequest = LoginRequest(
+            email=email,
+            password=password,
+        )
+
+        server.postRequest(loginRequest).enqueue(object : Callback<ResponseDTO> {
+            override fun onFailure(call: Call<ResponseDTO>?, t: Throwable?) {
+                Log.e("retrofit", t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDTO>?,
+                response: Response<ResponseDTO>?
+            ) {
+                if (response?.body()?.accessToken != null ) {
+
+                    FridayApplication.prefs.setString("accessToken",
+                        response.body()!!.accessToken
+                    )
+
+                    FridayApplication.prefs.setString("refreshToken",
+                        response.body()!!.refreshToken
+                    )
+                }
+            }
+        })
     }
 }
